@@ -5,6 +5,7 @@ package cmd
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/ihsan-alif/todo-cli/todo/internal"
 	"github.com/spf13/cobra"
@@ -17,11 +18,14 @@ var addCmd = &cobra.Command{
 	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 
+		now := time.Now()
 		// create new to-do item
 		todo := internal.Todo{
-			ID:   len(internal.Todos) + 1,
-			Text: args[0],
-			Done: false,
+			ID:        len(internal.Todos) + 1,
+			Text:      args[0],
+			Done:      false,
+			CreatedAt: now,
+			UpdatedAt: now,
 		}
 
 		// add to-do item to the list

@@ -6,6 +6,7 @@ package cmd
 import (
 	"fmt"
 	"strconv"
+	"time"
 
 	"github.com/ihsan-alif/todo-cli/todo/internal"
 	"github.com/spf13/cobra"
@@ -15,6 +16,7 @@ import (
 var updateCmd = &cobra.Command{
 	Use:   "update [id] [new text]",
 	Short: "Update to-do item",
+	Args: cobra.ExactArgs(2),
 	Run: func(cmd *cobra.Command, args []string) {
 		// get id from args
 		id, err := strconv.Atoi(args[0])
@@ -29,6 +31,7 @@ var updateCmd = &cobra.Command{
 		for i, t := range internal.Todos {
 			if t.ID == id {
 				internal.Todos[i].Text = newText
+				internal.Todos[i].UpdatedAt = time.Now()
 				internal.Savetodos()
 				fmt.Println("To-do item successfully updated")
 				return

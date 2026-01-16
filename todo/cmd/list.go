@@ -27,7 +27,11 @@ var listCmd = &cobra.Command{
 			if t.Done {
 				status = "✅"
 			}
-			fmt.Printf("%d. %s [%s]\n", t.ID, t.Text, status)
+			fmt.Printf("%d. %s [%s]\n",
+				t.ID,
+				t.Text,
+				status,
+			)
 		}
 	},
 }
